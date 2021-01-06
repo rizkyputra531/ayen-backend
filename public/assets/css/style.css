@@ -603,6 +603,18 @@ aside.left-panel {
     padding: 0;
     text-transform: uppercase;
     width: 100%; }
+  .navbar .judul {
+      color: #41434d;
+      /* clear: both;
+      display: block;
+      font-family: 'Open Sans'; */
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 50px;
+      padding: 0;
+      /* text-transform: uppercase; */
+      width: 100%;
+  }
   .navbar .navbar-nav {
     float: none;
     position: relative; }
@@ -1769,6 +1781,16 @@ header .form-inline {
   border-bottom: 1px solid #e7e7e7;
   padding: 30px 0px;
   background: #fcfcfc; }
+
+.login-h1 {
+    /* margin: 0px -30px;  */
+    /* border-top: 1px solid #e7e7e7; */
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e7e7e7;
+    /* padding: 30px 0px;
+    background: #fcfcfc; */
+}
 
 .social-button {
   padding: 0 30px; }

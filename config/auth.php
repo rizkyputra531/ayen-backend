@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'admin',
         'passwords' => 'users',
     ],
 
@@ -39,6 +39,11 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'ProvAdmin',
         ],
 
         'api' => [
@@ -70,6 +75,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+        'ProvAdmin' => [
+            'driver' => 'eloquent',
+            'model' => App\Model\Admin::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

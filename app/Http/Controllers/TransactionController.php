@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\ProductCategory;
-use App\Http\Requests\ProductCategoryRequest;
 
+// use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
+use App\Model\Transaction;
 
-
-class ProductCategoryController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -19,7 +19,6 @@ class ProductCategoryController extends Controller
     {
         $this->middleware('auth');
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -27,13 +26,11 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        // $items = ProductCategory::all();
-        $items = ProductCategory::orderby('id', 'DESC')->get();
+        $items = Transaction::orderby('id', 'DESC')->get();
 
-        return view('pages.productcategory.index')->with([
+        return view('pages.transactions.index')->with([
             'items' => $items
         ]);
-        // return view('pages.productcategory.index');
     }
 
     /**
@@ -43,8 +40,7 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        
-        // return view('pages.productcategory.create');
+        //
     }
 
     /**
@@ -53,13 +49,9 @@ class ProductCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductCategoryRequest $request)
+    public function store(Request $request)
     {
-        ProductCategory::create([
-            'nama'=>$request->nama
-        ]);
-        return redirect()->route('productcategory.index');
-        
+        //
     }
 
     /**
@@ -70,7 +62,12 @@ class ProductCategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Transaction::with('details.product')->findOrFail($id);
+        // $user = Transaction::with('user.transaction')->findOrFail($id);
+
+        return view('pages.transactions.show')->with([
+            'item' => $item
+        ]);
     }
 
     /**
@@ -81,7 +78,11 @@ class ProductCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Transaction::findOrFail($id);
+
+        return view('pages.transactions.edit')->with([
+            'item' => $item
+        ]);
     }
 
     /**
@@ -93,7 +94,13 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        
+        $item = Transaction::findOrFail($id);
+        $item -> update($data);
+
+        return redirect()->route('transaction.index');
     }
 
     /**
@@ -104,12 +111,20 @@ class ProductCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $item = ProductCategory::findOrFail($id);
-        $item -> delete();
+        //
+    }
 
+    public function setStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required:in:PENDING, SUCCESS, FAILED'
+        ]);
 
-        // ProductGallery::where('products_id', $id)->delete();
-        
-        return redirect()->route('productcategory.index');
+        $item = Transaction::findOrFail($id);
+        $item -> transaction_status = $request->status;
+
+        $item->save();
+
+        return redirect()->route('transaction.index');
     }
 }

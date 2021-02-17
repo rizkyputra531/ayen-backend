@@ -18,19 +18,22 @@
                     <div class="card-body">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
+                                <tr class="text-center">
+                                    <th>No</th>
                                     <th>Kategori</th>
-                                    <th class="text-right">Aksi</th>
+                                    <th class="">Aksi</th>
                                 </tr>
                             </thead>
+                            @php
+                            $no=1;
+                            @endphp
                             <tbody>
                                 @forelse ($items as $item)
                                 <tr>
                                     
-                                    <td>{{$item->id}}</td>
+                                    <td class="text-center">{{$no++}}.</td>
                                     <td>{{$item->nama}}</td>
-                                    <td align="right">
+                                    <td class="text-center">
                                         
                                         <form action="{{route('productcategory.destroy', $item->id )}}" method="post" class="d-inline">
                                             @csrf

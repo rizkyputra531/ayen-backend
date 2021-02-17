@@ -47,4 +47,9 @@ class User extends Model
 
         return $data->save();
     }
+
+    // public function transaction()
+    // {
+    //     return $this->belongsTo(Transaction::class,'id_user', 'id');
+    // }
 }

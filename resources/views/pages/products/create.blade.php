@@ -102,6 +102,19 @@
             </div>
 
             <div class="form-group">
+                <label for="satuan" class="form-control-label">Satuan </label>
+                <input type="text" 
+                name="satuan" 
+                value="{{ old('satuan') }}"
+                class="form-control @error('satuan') is-invalid @enderror">
+            @error('satuan')
+            <div class="text-muted">
+                {{$message}}
+            </div>
+            @enderror
+            </div>
+
+            <div class="form-group">
                 <label for="diskon" class="form-control-label">Diskon </label>
                 <input type="text" 
                 name="diskon" 

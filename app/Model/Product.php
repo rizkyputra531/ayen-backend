@@ -12,7 +12,7 @@ class Product extends Model
     protected $table = "products"; //table admin
 
     protected $fillable = [
-        'nama', 'slug', 'merk', 'kategori', 'foto', 'stok', 'harga', 'diskon', 'deskripsi'
+        'nama', 'slug', 'merk', 'kategori', 'foto', 'stok', 'harga', 'satuan', 'diskon', 'deskripsi'
     ];
 
     protected $hidden = [
@@ -24,7 +24,7 @@ class Product extends Model
         return $this->belongsTo(ProductCategory::class,'kategori','nama');
     }
 
-    public function getFotoAttribute($value)
+    public function getFotoAttribute ($value)
     {
         return url('storage/'. $value);
     }

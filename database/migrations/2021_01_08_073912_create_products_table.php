@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('foto');
             $table->string('stok');
             $table->integer('harga');
+            $table->string('satuan');
             $table->integer('diskon');
             $table->longtext('deskripsi');
 

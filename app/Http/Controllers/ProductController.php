@@ -9,7 +9,7 @@ use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-// use Storage;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -30,7 +30,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $items = Product::all();
+        // $items = Product::all();
+        $items = Product::orderby('id', 'DESC')->get();
 
         return view('pages.products.index')->with([
             'items' => $items
@@ -62,7 +63,10 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->all();
+        // $namaFile = time().rand(100,999).".".$data['foto']->getClientOriginalExtension();
         $data['slug'] = Str::slug($request->nama);
+        
+        
         $data['foto'] = $request->file('foto')->store(
             'assets/product', 'public'
         );
@@ -114,13 +118,24 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
+
+
     public function update(ProductUpdateRequest $request, $id)
     {
         
         $data = $request->all();
+            
+        // if ($request->user()->foto){
+        //     Storage::delete($request->user()->foto);
+        // }
+        // $data['foto'] = $request->file('foto')->store(
+        //     'assets/product', 'public'
+        // );
+
 
         $data['slug'] = Str::slug($request->nama);
-
+        
         
         $item = Product::findOrFail($id);
         $item -> update($data);
@@ -149,12 +164,12 @@ class ProductController extends Controller
         
     //     $data = $request->all();
 
-    //     if ($request->user()->foto){
-    //         Storage::delete($request->user()->foto);
-    //     }
-    //     $data['foto'] = $request->file('foto')->store(
-    //         'assets/product', 'public'
-    //     );
+        // if ($request->user()->foto){
+        //     Storage::delete($request->user()->foto);
+        // }
+        // $data['foto'] = $request->file('foto')->store(
+        //     'assets/product', 'public'
+        // );
 
     //     $data['slug'] = Str::slug($request->nama);
 

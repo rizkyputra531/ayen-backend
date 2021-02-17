@@ -24,7 +24,7 @@
                             
                             <thead width="500px">
                                 <tr>
-                                    <th>#</th>
+                                    <th>No</th>
                                     <th width="300px">Nama</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Nomor HP</th>
@@ -33,11 +33,14 @@
                                     <th class="text-right">Aksi</th>
                                 </tr>
                             </thead>
+                            @php
+                            $no=1;
+                            @endphp
                             <tbody>
                                 @forelse ($items as $item)
                                 <tr>
                                     
-                                    <td>{{$item->id}}</td>
+                                    <td>{{$no++}}</td>
                                     <td>{{$item->nama}}</td>
                                     <td>{{$item->jenis_kelamin}}</td>
                                     <td>{{$item->nomor_hp}}</td>

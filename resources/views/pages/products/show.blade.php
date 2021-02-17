@@ -69,9 +69,10 @@
                     <label for="#" class="col-md-1 col-form-label text-md-left">{{ __(':') }}</label>
 
                     <div class="col-md-6 mt-2">
-                        <b>{{ $item->harga}}</b>
+                        <b>Rp. {{ $item->harga}} /{{ $item->satuan}}</b>
                     </div>
                 </div>
+                
                 <div class="form-group row">
                     <label for="diskon" class="col-md-3 col-form-label text-md-left">{{ __('Diskon') }}</label>
                     <label for="#" class="col-md-1 col-form-label text-md-left">{{ __(':') }}</label>

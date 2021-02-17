@@ -22,7 +22,7 @@
 
                 <li class="menu-title">Transaksi</li><!-- /.menu-title -->
                 <li class="">
-                    <a href="#"> <i class="menu-icon fa fa-bar-chart-o"></i>Lihat Transaksi</a>
+                    <a href="{{route('transaction.index')}}"> <i class="menu-icon fa fa-bar-chart-o"></i>Lihat Transaksi</a>
                 </li>
 
                 <li class="menu-title">Laporan</li><!-- /.menu-title -->

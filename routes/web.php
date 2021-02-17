@@ -44,8 +44,14 @@ Route::get('/logout', 'Auth\AuthController@logout')->middleware('auth')->name('l
 
 
 Route::resource('products', 'ProductController');
+
 Route::get('/upload', 'ProductFotoController@uploadfoto')->name('upload');
 Route::resource('productcategory', 'ProductCategoryController');
 
 Route::resource('admin', 'AdminController');
 Route::resource('user', 'UserController');
+
+Route::resource('transaction', 'TransactionController');
+
+Route::get('transaction/{id}/set-status', 'TransactionController@setStatus')
+    ->name('transaction.status');

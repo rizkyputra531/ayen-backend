@@ -26,7 +26,7 @@
             <div class="form-group">
                 <label for="jenis_kelamin" class=" form-control-label">Jenis Kelamin</label>
                 <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" value="{{old('jenis_kelamin')}}" required>
-                   s
+                   
                          <option value="Pria">Pria</option>
                          <option value="Wanita">Wanita</option>
                 

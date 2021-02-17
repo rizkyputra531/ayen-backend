@@ -30,9 +30,10 @@ class ProductRequest extends FormRequest
             //'slug' => 'required|max:255',
             'merk' => 'required|max:255',
             'kategori' => 'required|max:255',
-            'foto' => 'required|image',
+            'foto' => 'required|image|mimes:jpeg,png,jpg',
             'stok' => 'required|integer',
             'harga' => 'required|integer',
+            'satuan' => 'required',
             'diskon' => 'required|integer',
             'deskripsi' => 'required|max:255'
         ];

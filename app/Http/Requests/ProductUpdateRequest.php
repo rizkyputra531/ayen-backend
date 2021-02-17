@@ -24,15 +24,15 @@ class ProductUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama' => 'required|max:255',
+            'nama' => 'max:255',
             //'slug' => 'required|max:255',
-            'merk' => 'required|max:255',
-            'kategori' => 'required|max:255',
-            //'foto' => 'required|image',
-            'stok' => 'required|integer',
-            'harga' => 'required|integer',
-            'diskon' => 'required|integer',
-            'deskripsi' => 'required|max:255'
+            'merk' => 'max:255',
+            'kategori' => 'max:255',
+            // 'foto' => 'image',
+            'stok' => 'integer',
+            'harga' => 'integer',
+            'diskon' => 'integer',
+            'deskripsi' => 'max:255'
         ];
     }
     

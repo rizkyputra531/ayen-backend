@@ -4,8 +4,8 @@
         <div class="navbar-header">
             {{-- <a class="navbar-brand" href="./"><img src="images/logo.png" alt="Logo"></a>
             <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a> --}}
-            <a class="navbar-brand" href="./">AYEN ADMIN</a>
-            <a class="navbar-brand hidden" href="./">AYEN ADMIN</a>
+            <a class="navbar-brand" href="./">Teman Pasar</a>
+            <a class="navbar-brand hidden" href="./">Teman Pasar</a>
             <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
         </div>
     </div>

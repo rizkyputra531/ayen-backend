@@ -12,7 +12,7 @@ class Product extends Model
     protected $table = "products"; //table admin
 
     protected $fillable = [
-        'nama', 'slug', 'merk', 'kategori', 'foto', 'stok', 'harga', 'satuan', 'diskon', 'deskripsi'
+        'nama', 'slug', 'merk', 'kategori', 'foto', 'image_name', 'stok', 'harga', 'satuan', 'diskon', 'deskripsi'
     ];
 
     protected $hidden = [

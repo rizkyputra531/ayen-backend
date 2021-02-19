@@ -1,13 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use App\Http\Controllers\ApiController;
+use App\Http\Repositories\ProductRepository;
 use App\Http\Controllers\Controller;
 use App\Model\Product;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductController extends ApiController
 {
+    public $productRepo;
+    public function __construct(ProductRepository $productRepo)
+    {
+        $this->productRepo = $productRepo;
+    }
+
     public function all(Request $request){
 
         // $id = $request -> input('id');
@@ -31,9 +38,24 @@ class ProductController extends Controller
 
         if($price_to)
             $product->where('harga', '<=', $price_to);
-        
-        
+    }
 
+    public function getProduct(Request $request)
+    {
+        $limit = $request->limit;
+        $offset = $request->offset;
 
+        $productData = $this->productRepo->getProduct($limit,$offset);
+
+        if($productData->count() > 0){
+            $result = $this->sendResponse(0, 'sukses', $productData);
+        } else if ($productData->count() == 0) {
+            $result = $this->sendResponse(0, 'Data Kosong');
+        } else {
+            $result = $this->sendError(2, 'Error');
+        }
+
+        return $result;
     }
 }
+

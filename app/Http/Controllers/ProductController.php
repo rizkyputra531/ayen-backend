@@ -66,12 +66,13 @@ class ProductController extends Controller
         // $namaFile = time().rand(100,999).".".$data['foto']->getClientOriginalExtension();
         $data['slug'] = Str::slug($request->nama);
         
-        
-        $data['foto'] = $request->file('foto')->store(
-            'assets/product', 'public'
-        );
-
+        $imageName= $data['foto']->getClientOriginalName();
+       
+        $data['foto'] = $request->file('foto')->storeAs(
+            'assets/product', $imageName, 'public');
+        $data['image_name'] = $imageName;
         Product::create($data);
+        
         return redirect()->route('products.index');
     }
 

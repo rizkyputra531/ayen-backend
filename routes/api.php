@@ -13,8 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::get('products', 'API\ProductController@all');
+
+// VERSIONING API V1
+Route::group(['prefix' => 'v1'], function () {
+    Route::get('products/all', 'API\ProductController@getProduct');
+});

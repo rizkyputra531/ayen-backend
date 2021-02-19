@@ -14,6 +14,7 @@ class ProductRepository
             'products.nama',
             'products.kategori',
             'products.foto',
+            'products.image_name',
             'products.harga',
             'products.satuan',
             'products.diskon',

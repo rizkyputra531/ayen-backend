@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 class User extends Model
 {
     //
-    protected $table = "user"; //table admin
+    protected $table = "user"; //table user
 
     protected $fillable = [
         'nama', 'jenis_kelamin', 'nomor_hp', 'alamat', 'username',

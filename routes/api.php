@@ -20,6 +20,9 @@ use Illuminate\Http\Request;
 Route::get('products', 'API\ProductController@all');
 
 // VERSIONING API V1
-Route::group(['prefix' => 'v1'], function () {
+Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
+    Route::post('register', 'API\RegisterController@registerUser');
+    Route::post('login', 'API\RegisterController@login');
     Route::get('products/all', 'API\ProductController@getProduct');
+    Route::get('category/all', 'API\ProductCategoryController@getProductCategory');
 });

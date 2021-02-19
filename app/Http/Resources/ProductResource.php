@@ -22,7 +22,7 @@ class ProductResource extends JsonResource
             'harga' => $this->harga,
             'satuan' => $this->satuan,
             'diskon' => $this->diskon,
-            'foto_url' =>  ($this->foto == null ? asset('storage/img/default.png') : asset('storage' . $this->foto)),
+            'foto_url' =>  ($this->foto == null ? asset('storage/img/default.png') : asset('storage/' . $this->foto))
         ];
     }
 }

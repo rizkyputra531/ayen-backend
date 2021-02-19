@@ -51,6 +51,12 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'api-member' => [
+            'driver' => 'session',
+            'provider' => 'ProvMember',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -78,6 +84,10 @@ return [
         'ProvAdmin' => [
             'driver' => 'eloquent',
             'model' => App\Model\Admin::class,
+        ],
+        'ProvMember' => [
+            'driver' => 'eloquent',
+            'model' => App\Member::class,
         ]
 
         // 'users' => [

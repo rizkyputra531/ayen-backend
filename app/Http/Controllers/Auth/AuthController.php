@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Admin;
 use Illuminate\Support\Facades\Auth;
+use Session;
 // use Auth;
 
 class AuthController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
     
     public function getLogin()
     {
@@ -30,6 +35,11 @@ class AuthController extends Controller
     public function getRegister()
     {
         return view('auth.register');
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('web');
     }
 
 
@@ -57,9 +67,10 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::logout();
+        $this->guard()->logout();
+        Session::flush();
 
         return redirect()->route('login');
     }
@@ -69,8 +80,5 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
+   
 }

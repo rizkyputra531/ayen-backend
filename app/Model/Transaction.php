@@ -13,7 +13,7 @@ class Transaction extends Model
     protected $table = "transactions"; //table admin
 
     protected $fillable = [
-        'uuid', 'nama', 'email', 'nomor_hp', 'ekspedisi_kirim','alamat_kirim', 'transaction_total', 'transaction_status'
+        'uuid', 'nama', 'email', 'nomor_hp', 'ekspedisi_kirim','alamat_kirim', 'transaction_total', 'transaction_status', 'order_status'
     ];
 
     protected $hidden = [

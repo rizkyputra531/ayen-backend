@@ -14,6 +14,7 @@
     @stack('before-style')
     @include('includes.style')
     @stack('after-style')
+    @yield('css')
 </head>
 
 <body>
@@ -41,6 +42,8 @@
     {{-- script --}}
     @stack('before-script')
     @include('includes.script')
+    @yield('script')
     @stack('after-script')
+    
 </body>
 </html>

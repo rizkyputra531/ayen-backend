@@ -10,6 +10,7 @@ use App\Http\Requests\ProductUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -127,6 +128,14 @@ class ProductController extends Controller
         
         $data = $request->all();
             
+        if($request->hasFile('foto')){
+            $imageName= $data['foto']->getClientOriginalName();
+       
+            $data['foto'] = $request->file('foto')->storeAs(
+                'assets/product', $imageName, 'public');
+            $data['image_name'] = $imageName;
+        }
+        
         // if ($request->user()->foto){
         //     Storage::delete($request->user()->foto);
         // }
@@ -152,6 +161,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        DB::table('products')
+                        ->where('id', $id)
+                        ->where('product_status', 1)
+                        ->update([
+                            'product_status' => 0
+                        ]);
         $item = Product::findOrFail($id);
         $item -> delete();
 

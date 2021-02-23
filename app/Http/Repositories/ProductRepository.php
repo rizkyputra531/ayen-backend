@@ -13,6 +13,7 @@ class ProductRepository
             'products.id',
             'products.nama',
             'products.kategori',
+            'products.stok',
             'products.foto',
             'products.image_name',
             'products.harga',
@@ -21,6 +22,8 @@ class ProductRepository
         ];
 
         $thisProduct = DB::table('products')
+                        ->where('product_status', 1)
+                        ->where('stok', '!=', 0)
                         ->select($select);
 
         if($limit == null){

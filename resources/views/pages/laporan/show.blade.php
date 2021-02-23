@@ -42,11 +42,11 @@
                             <th>Tipe</th>
                             <th>Harga</th>
                         </tr>
-                        @foreach ($dataBarang as $detail)
+                        @foreach ($item->details as $detail)
                         <tr>
-                            <td>{{$detail->products_name}}</td>
-                            <td>{{$detail->qty}}</td>
-                            <td>Rp. {{$detail->price_total}}</td>
+                            <td>{{$detail->product->nama}}</td>
+                            <td>{{$detail->product->merk}}</td>
+                            <td>Rp. {{$detail->product->harga}}</td>
                         </tr>
                         @endforeach
                     </table>

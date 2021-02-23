@@ -8,6 +8,8 @@ use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 use App\Model\Transaction;
 
+use Illuminate\Support\Facades\DB;
+
 class TransactionController extends Controller
 {
     /**
@@ -26,7 +28,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $items = Transaction::orderby('id', 'DESC')->get();
+        $items = Transaction::where('order_status', '!=' , 1)->orderby('id', 'DESC')->get();
 
         return view('pages.transactions.index')->with([
             'items' => $items
@@ -64,9 +66,13 @@ class TransactionController extends Controller
     {
         $item = Transaction::with('details.product')->findOrFail($id);
         // $user = Transaction::with('user.transaction')->findOrFail($id);
+        
+        $dataBarang = DB::table('user_order')
+        ->where('order_code', $item->user_order_code)
+        ->get();
 
         return view('pages.transactions.show')->with([
-            'item' => $item
+            'item' => $item, 'dataBarang' => $dataBarang
         ]);
     }
 
@@ -119,11 +125,45 @@ class TransactionController extends Controller
         $request->validate([
             'status' => 'required:in:PENDING, SUCCESS, FAILED'
         ]);
+        $status = $request->status;
+        
+       $dataTransaksi =  DB::table('transactions')
+                    ->where('id', $id)
+                    ->first(['id_user', 'user_order_code', 'order_status']);
 
-        $item = Transaction::findOrFail($id);
-        $item -> transaction_status = $request->status;
+        $dataBarang = DB::table('user_order')
+        ->where('order_code', $dataTransaksi->user_order_code)
+        ->get();
 
-        $item->save();
+
+        if ( $status == 'SUKSES'){
+            try {
+                //code...
+                foreach ($dataBarang as $barang){
+              
+                    $result = DB::table('products')
+                            ->where('id', $barang->products_id)
+                            ->decrement('stok', $barang->qty);
+                            
+                }
+                $item = Transaction::findOrFail($id);
+                $item -> transaction_status = $request->status;
+                $item -> order_status = 3;
+                $item -> save();
+            } catch (\Throwable $th) {
+                //throw $th;
+               
+            }
+        } else {
+            $item = Transaction::findOrFail($id);
+            $item -> transaction_status = $request->status;
+            $item -> order_status = 2;
+            $item -> save();
+        }
+
+        
+
+        
 
         return redirect()->route('transaction.index');
     }

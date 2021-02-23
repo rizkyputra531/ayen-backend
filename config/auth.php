@@ -46,6 +46,11 @@ return [
             'provider' => 'ProvAdmin',
         ],
 
+        'member' => [
+            'driver' => 'session',
+            'provider' => 'ProvMember',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -53,7 +58,7 @@ return [
         ],
 
         'api-member' => [
-            'driver' => 'session',
+            'driver' => 'passport',
             'provider' => 'ProvMember',
             'hash' => false,
         ],

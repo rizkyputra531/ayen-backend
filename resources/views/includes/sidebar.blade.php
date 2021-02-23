@@ -27,7 +27,7 @@
 
                 <li class="menu-title">Laporan</li><!-- /.menu-title -->
                 <li class="">
-                    <a href="#"> <i class="menu-icon fa fa-external-link"></i>Cetak Laporan</a>
+                    <a href="{{route('laporan.index')}}"> <i class="menu-icon fa fa-external-link"></i>Cetak Laporan</a>
                 </li>
 
                 <li class="menu-title">Pengguna</li><!-- /.menu-title -->

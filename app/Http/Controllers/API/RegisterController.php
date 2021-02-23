@@ -14,12 +14,13 @@ class RegisterController extends ApiController
 {
     public function registerUser(Request $request)
     {
+       
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email|unique:user',
             'nama' => 'required|string',
             'nomor_hp' => 'required|string',
             'password' => 'required|min:8',
-            'password_confirmation' => 'required_with:password|same:password|min:8',
+            'passwordConfirm' => 'required_with:password|same:password|min:8',
         ]);
 
         if ($validator->fails()) {
@@ -41,13 +42,14 @@ class RegisterController extends ApiController
         }
 
         // automatic login
-        Auth::guard('api-member')->attempt($dataLogin);
-        
-        $user = Auth::guard('api-member')->user();
+       
+        Auth::guard('member')->attempt($dataLogin);
+       
+        $user = Auth::guard('member')->user();
         $success['token'] = $user->createToken($user->email)->accessToken;
         $success['name']  = $user->nama;
         $success['email']  = $user->email;
-        $success['id']  = $user->user()->id;
+        $success['id']  = $user->id;
         return $this->sendResponse(0, "Berhasil Registrasi", $success);
     }
 
@@ -64,10 +66,10 @@ class RegisterController extends ApiController
 
         $credentials = request(['email', 'password']);
 
-        if (!Auth::guard('api-member')->attempt($credentials)) {
+        if (!Auth::guard('member')->attempt($credentials)) {
             return $this->errorAuth(2, "Email atau Password Salah", (object) array());
         }
-        $user =   Auth::guard('api-member')->user();
+        $user =   Auth::guard('member')->user();
         $success['token'] = $user->createToken($user->email)->accessToken;
         $success['name']  = $user->nama;
         $success['email']  = $user->email;

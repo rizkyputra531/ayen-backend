@@ -19,6 +19,7 @@ class ProductRepository
             'products.harga',
             'products.satuan',
             'products.diskon',
+            'products.deskripsi'
         ];
 
         $thisProduct = DB::table('products')
